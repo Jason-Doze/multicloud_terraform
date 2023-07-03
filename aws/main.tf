@@ -8,17 +8,17 @@ terraform {
 
   required_version = ">= 1.2.0"
 }
+
+# Configure the AWS Provider
 provider "aws" {
-    access_key = "${var.access_key}"
-    secret_key = "${var.secret_key}"
-    region = "us-east-1"
+  region = "us-east-1"
 }
 
-resource "aws_instance" "ec2_instance" {
-    ami = "${var.ami_id}"
-    count = "${var.number_of_instances}"
-    subnet_id = "${var.subnet_id}"
-    instance_type = "${var.instance_type}"
-    key_name = "${var.ami_key_pair}"
-} 
+resource "aws_instance" "aws_terra_01" {
+  ami           = "ami-06a1f46caddb5669e"
+  instance_type = "t2.micro"
 
+  tags = {
+    Name = "aws_terra_01"
+  }
+}

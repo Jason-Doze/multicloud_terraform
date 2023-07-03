@@ -1,7 +1,10 @@
 commands.txt
 
-id_rsa
+cloud-init.yaml
 
-.terraform*
+id_ed25519*
 
-terraform.tfvars
+.env
+
+
+
