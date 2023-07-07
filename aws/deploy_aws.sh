@@ -2,9 +2,6 @@
 
 # Deploy AWS instance using terraform
 
-# Export environment variables
-source .env
-
 # Initialize Terraform
 terraform init
 
@@ -22,6 +19,3 @@ terraform apply
 
 # Inspect state
 terraform show
-
-# Destroy Infrastructure
-# terraform destroy

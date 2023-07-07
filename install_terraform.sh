@@ -17,7 +17,16 @@ then
   echo -e "\n\033[1;32m==== Gnupg present ====\033[0m\n"
 else
   echo -e "\n\033[1;33m==== Installing Gnupg ====\033[0m\n"
-  sudo apt install -y gnupg software-properties-common
+  sudo apt install -y gnupg
+fi
+
+# Install software-properties-common
+if ( dpkg -s software-properties-common > /dev/null )
+then
+  echo -e "\n\033[1;32m==== Software-properties-common present ====\033[0m\n"
+else
+  echo -e "\n\033[1;33m==== Installing software-properties-common ====\033[0m\n"
+  sudo apt install -y software-properties-common
 fi
 
 # Install GPG key

@@ -103,4 +103,16 @@ else
 fi
 
 # Login to Azure
-az login --tenant $ARM_TENANT_ID
+if ( az account show )
+then
+  echo -e "\n\033[1;32m==== Logged in to Azure ====\033[0m\n"
+else
+  echo -e "\n\033[1;33m==== Logging in to Azure ====\033[0m\n"
+  az login --tenant $ARM_TENANT_ID
+    if [ $? -ne 0 ]
+    then
+      echo -e "\n\033[1;31m==== Azure login failed ====\033[0m\n"
+      exit 1
+    fi
+fi
+
