@@ -75,8 +75,23 @@ fi
 echo -e "\n\033[1;32m==== Transferring files to VM ====\033[0m\n"
 rsync -av -e "ssh -o StrictHostKeyChecking=no -i ./id_ed25519" --delete --exclude={'.git','.gitignore','id_ed25519','id_ed25519.pub','cloud-init.yaml','README.md','vm_deploy.sh','vm_destroy.sh','pi_local.sh','commands.txt'} $(pwd) $USER@$(multipass info nameless | grep IPv4 | awk '{ print $2 }'):/home/$USER
 
-echo -e "\n\033[1;32m==== Execute install scripts on VM ====\033[0m\n"
-ssh -o StrictHostKeyChecking=no -i ./id_ed25519 $USER@$(multipass info nameless | grep IPv4 | awk '{ print $2 }') 'cd multicloud_terraform && bash install_terraform.sh && cd aws && bash install_aws.sh && bash deploy_aws.sh'
+# Pass arguments to execute scripts
+if [ "$1" == "aws" ]
+then
+  echo -e "\n\033[1;32m==== Running AWS scripts ====\033[0m\n"
+  ssh -o StrictHostKeyChecking=no -i ./id_ed25519 $USER@$(multipass info nameless | grep IPv4 | awk '{ print $2 }') 'cd multicloud_terraform && bash install_terraform.sh && cd aws && bash install_aws.sh && bash deploy_aws.sh'
+elif [ "$1" == "azure" ]
+then
+  echo -e "\n\033[1;32m==== Running Azure scripts ====\033[0m\n"
+  ssh -o StrictHostKeyChecking=no -i ./id_ed25519 $USER@$(multipass info nameless | grep IPv4 | awk '{ print $2 }') 'cd multicloud_terraform && bash install_terraform.sh && cd azure && bash install_azure.sh && bash deploy_azure.sh'
+elif [ "$1" == "gcp" ]
+then
+  echo -e "\n\033[1;32m==== Creating GCP instance ====\033[0m\n"
+else
+  echo -e "\n\033[1;33m==== Invalid argument. Specify either 'aws', 'azure', or 'gcp' ====\033[0m\n"
+  exit 1
+fi
+
 
 echo -e "\n\033[1;32m==== SSH into VM ====\033[0m\n"
-ssh -o StrictHostKeyChecking=no -i ./id_ed25519 $USER@$(multipass info nameless | grep IPv4 | awk '{ print $2 }') 'cd multicloud_terraform/aws && bash'
+ssh -o StrictHostKeyChecking=no -i ./id_ed25519 $USER@$(multipass info nameless | grep IPv4 | awk '{ print $2 }') 
