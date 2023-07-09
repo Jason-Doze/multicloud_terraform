@@ -35,7 +35,8 @@ then
   echo -e "\n\033[1;32m==== Hashi key present ====\033[0m\n"
 else
   echo -e "\n\033[1;33m==== Downloading Hashi key  ====\033[0m\n"
-  wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | /
+  sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 fi
 
 # Verify key fingerprint

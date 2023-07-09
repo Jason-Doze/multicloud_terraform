@@ -17,10 +17,10 @@ then
   echo -e "\n\033[1;32m==== awscliv2.zip present ====\033[0m\n"
 else 
   echo -e "\n\033[1;33m==== Downloading awscliv2.zip ====\033[0m\n"
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 fi
 
-if [ -f aws/install ]
+if ( aws --version )
 then
   echo -e "\n\033[1;32m==== AWS-CLI installed ====\033[0m\n"
 else 

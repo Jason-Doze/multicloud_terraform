@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Export environment variables
-source .env
-
 # Deploy AWS instance using terraform
 
 # Initialize Terraform
